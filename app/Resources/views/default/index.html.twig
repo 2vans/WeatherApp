@@ -14,9 +14,9 @@
         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
             <span class="caret"></span>{{ city }}</button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="?city=Warsaw">Warsaw</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="?city=Katowice">Katowice</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="?city=Gdansk">Gdansk</a></li>
+            <li role="presentation"><a role="menuitem" href="warsaw">Warsaw</a></li>
+            <li role="presentation"><a role="menuitem" href="katowice">Katowice</a></li>
+            <li role="presentation"><a role="menuitem" href="gdansk">Gdansk</a></li>
         </ul>
     </div>
 
@@ -24,7 +24,7 @@
 {{ country }}
 {{ temp }}
 {{ condition }}
-
+    {{ dump(phpObj) }}
 </body>
 </html>
 

@@ -12,13 +12,13 @@ class DefaultController extends Controller
     /**
      * @Route("/{mainCity}", name="WeatherApp")
      */
-    public function indexAction($mainCity = 'warsaw')
+    public function indexAction($mainCity = 'warszawa')
     {
 
 
 
 
-        $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
+        $BASE_URL = "http://query.yahooapis.com/v1/public/yql"; // do parametrow
         $yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='$mainCity')";
         $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json";
         // Make call with cURL
@@ -35,7 +35,7 @@ class DefaultController extends Controller
         $temp = $response->item->condition->temp;
         $condition = $response->item->condition->text;
 
-        // replace this example code with whatever you need
+
         return $this->render('default/index.html.twig',
             array('phpObj' => $phpObj ,'city' => $city, 'country' =>$country, 'temp' => $temp, 'condition' => $condition));
     }

@@ -2,6 +2,15 @@
     namespace AppBundle\Service;
 
     class Weather {
+
+        /**
+         * @param string $whichCity
+         *
+         * @return array
+         */
+
+
+
         public function getWeather($whichCity)
         {
             $BASE_URL = "http://query.yahooapis.com/v1/public/yql"; // do parametrow

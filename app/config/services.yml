@@ -34,6 +34,6 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    AppBundle\Controller\Service:
-      public: false
-      tags: [weather]
+    app.weather:
+        class: AppBundle\Service\Weather
+        public: true

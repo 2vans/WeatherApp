@@ -12,14 +12,13 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/{mainCity}", name="WeatherApp")
-     * @param string $mainCity
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction($mainCity = 'warszawa')
     {
 
-        $weatherService = new Weather();
+        $weatherService = $this->get('app.weather');
         $currentWeather = $weatherService->getWeather($mainCity);
+
 
 
 

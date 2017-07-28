@@ -38,13 +38,46 @@ class WeatherInfo
      */
     private $country;
     /**
-     * @ORM\Column(type="var")
+     * @ORM\Column(type="integer")
      */
     private $temp;
     /**
      * @ORM\Column(type="string")
      */
     private $condition;
+
+    /**
+     * WeatherInfo constructor.
+     * @param $id
+     * @param $city
+     * @param $country
+     * @param $temp
+     * @param $condition
+     */
+    public function __construct($city = 'test', $country = 'test', $temp = 'test', $condition = 'test')
+    {
+        $this->city = $city;
+        $this->country = $country;
+        $this->temp = $temp;
+        $this->condition = $condition;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return mixed
@@ -109,5 +142,7 @@ class WeatherInfo
     {
         $this->condition = $condition;
     }
+
+
 
 }

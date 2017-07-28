@@ -40,28 +40,35 @@ class DefaultController extends Controller
 
         $jsonContent = $serializer->serialize($jsonWeather, 'json');
 
-        $fs = new  Filesystem();
-        $zmienna = 'kupa';
-        dump($zmienna);
-        try {
-            if (!$fs->exists(__DIR__ . '/app/Resources/kupa')) {
+        $cnx = $this->getDoctrine()->getConnection();
 
-                $fs->mkdir(__DIR__ . '/app/Resources/kupa');
-            }
-        } catch (IOException $e) {
-            echo "An error occurred while creating your directory at ".$e->getPath();
+
+
+        if(    $cnx->isConnected()) {
+            dump('polaczone');
+        }   else {
+            dump('niepolaczone');
         }
-            try {
-                $fs->dumpFile(__DIR__ . '/app/Resources/file.json', $jsonContent);
-            } catch (IOException $e) {
-            }
+
 
 
         return $this->render('default/test.html.twig', ['content' => $jsonContent]
         );
     }
 
+    /**
+     * @Route("/new", name="newCity")
+     */
 
+    public function newAtcion() {
+        $weatherInfo = new WeatherInfo('warsaw', 'poland' ,33 ,'sunny');
+        $dbConect = $this->getDoctrine()->getManager();
+        $dbConect->persist($weatherInfo);
+        $dbConect->flush();
+
+        return new Response('cos sie stao');
+
+    }
 
 
     /**

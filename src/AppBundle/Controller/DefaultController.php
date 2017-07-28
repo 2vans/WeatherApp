@@ -64,14 +64,14 @@ class DefaultController extends Controller
         $weatherInfo = new WeatherInfo();
 
         $weatherInfo->setTemp(33);
-        $weatherInfo->setCondition('cloudy');
+        $weatherInfo->setCond('cloudy');
         $weatherInfo->setCountry('Poland');
         $weatherInfo->setCity('warsaw');
         $dbConect = $this->getDoctrine()->getManager();
         $dbConect->persist($weatherInfo);
         $dbConect->flush();
 
-        return new Response('cos sie stao');
+        return $this->render('default/phpinfo.html.twig');
 
     }
 

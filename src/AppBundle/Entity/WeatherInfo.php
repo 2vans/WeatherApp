@@ -33,50 +33,47 @@ class WeatherInfo
      */
 
     private $city;
+
+
     /**
      * @ORM\Column(type="string")
      */
+
     private $country;
+
+
+    /**
+     * @ORM\Column(type="string")
+     */
+
+    private $cond;
+
+
     /**
      * @ORM\Column(type="integer")
      */
+
     private $temp;
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $condition;
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getCond()
     {
-        return $this->id;
+        return $this->cond;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $cond
      */
-    public function setId($id)
+    public function setCond($cond)
     {
-        $this->id = $id;
+        $this->cond = $cond;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
 
-    /**
-     * @param mixed $city
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-    }
+
+
 
     /**
      * @return mixed
@@ -94,6 +91,11 @@ class WeatherInfo
         $this->country = $country;
     }
 
+
+
+
+
+
     /**
      * @return mixed
      */
@@ -110,20 +112,22 @@ class WeatherInfo
         $this->temp = $temp;
     }
 
+
+
     /**
      * @return mixed
      */
-    public function getCondition()
+    public function getCity()
     {
-        return $this->condition;
+        return $this->city;
     }
 
     /**
-     * @param mixed $condition
+     * @param mixed $city
      */
-    public function setCondition($condition)
+    public function setCity($city)
     {
-        $this->condition = $condition;
+        $this->city = $city;
     }
 
 

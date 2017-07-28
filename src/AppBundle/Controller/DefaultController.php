@@ -61,7 +61,12 @@ class DefaultController extends Controller
      */
 
     public function newAtcion() {
-        $weatherInfo = new WeatherInfo('warsaw', 'poland' ,33 ,'sunny');
+        $weatherInfo = new WeatherInfo();
+
+        $weatherInfo->setTemp(33);
+        $weatherInfo->setCondition('cloudy');
+        $weatherInfo->setCountry('Poland');
+        $weatherInfo->setCity('warsaw');
         $dbConect = $this->getDoctrine()->getManager();
         $dbConect->persist($weatherInfo);
         $dbConect->flush();

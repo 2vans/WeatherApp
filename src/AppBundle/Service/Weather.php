@@ -1,5 +1,6 @@
 <?php
     namespace AppBundle\Service;
+    use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
     class Weather {
 
@@ -23,6 +24,11 @@
             // Convert JSON to PHP object
             $phpObj = json_decode($json);
 
+
+            if ($response = $phpObj->query->results == null) {
+                throw new NotFoundHttpException('City not found');
+            }
+
             $response = $phpObj->query->results->channel;
 
             $city = $response->location->city;
@@ -30,7 +36,8 @@
             $temp = $response->item->condition->temp;
             $condition = $response->item->condition->text;
 
-            return array('phpObj' => $phpObj, 'city' => $city, 'country' => $country, 'temp' => $temp, 'condition' => $condition);
+
+            return array('city' => $city, 'country' => $country, 'temp' => $temp, 'condition' => $condition);
 
 
         }

@@ -37,3 +37,8 @@ services:
     app.weather:
         class: AppBundle\Service\Weather
         public: true
+
+    app.weather_database:
+      class: AppBundle\Service\WeatherDatabase
+      public: true
+      arguments: [ "@doctrine.orm.entity_manager" ]

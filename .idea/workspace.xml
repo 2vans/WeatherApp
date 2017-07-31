@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d79e03cf-5e3f-405b-8eb0-ce915d609b5e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/WeatherApp.iml" afterPath="$PROJECT_DIR$/.idea/WeatherApp.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/WeatherInfo.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/WeatherInfo.php" />
     </list>
@@ -20,34 +22,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="70" column="41" lean-forward="true" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
+            <state relative-caret-position="236">
+              <caret line="90" column="23" lean-forward="false" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="23" />
               <folding>
                 <element signature="e#40#64#0#PHP" expanded="true" />
-                <element signature="e#2065#2092#1#PHP" expanded="true" />
+                <element signature="e#2079#2102#1#PHP" expanded="true" />
+                <element signature="e#2744#2767#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <file leaf-file-name="phpinfo.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+            <state relative-caret-position="252">
+              <caret line="29" column="74" lean-forward="false" selection-start-line="29" selection-start-column="74" selection-end-line="29" selection-end-column="74" />
+              <folding>
+                <element signature="e#485#495#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WeatherInfo.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WeatherInfo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1008">
+              <caret line="48" column="18" lean-forward="false" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeatherInfo.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WeatherInfo.php">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/default/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="848">
-              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -70,7 +85,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/AppBundle/Service/Weather.php" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
-        <option value="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
@@ -79,8 +93,9 @@
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/app/Resources/views/default/phpinfo.html" />
-        <option value="$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/WeatherInfo.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
       </list>
     </option>
@@ -155,7 +170,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -189,11 +203,44 @@
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="WeatherApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WeatherApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="WeatherApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WeatherApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="WeatherApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WeatherApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="WeatherApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WeatherApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="WeatherApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WeatherApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -295,15 +342,16 @@
       <workItem from="1500976513718" duration="1805000" />
       <workItem from="1501059151263" duration="12551000" />
       <workItem from="1501145615633" duration="12869000" />
-      <workItem from="1501231931846" duration="15028000" />
+      <workItem from="1501231931846" duration="15643000" />
+      <workItem from="1501493310077" duration="5587000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56359000" />
+    <option name="totallyTimeSpent" value="62561000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2097" y="277" width="1303" height="780" extended-state="6" />
+    <frame x="2097" y="277" width="1301" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -384,7 +432,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -428,7 +477,8 @@
           <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="21" selection-end-column="65" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -471,7 +521,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -512,7 +563,8 @@
           <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -531,7 +583,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -581,7 +634,8 @@
           <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -592,7 +646,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -623,13 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -682,7 +730,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,24 +737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/Weather.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-          <folding>
-            <marker date="1501067899682" expanded="true" signature="328:431" ph="select * fro... forecast" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/test.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -720,18 +749,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/test.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -744,30 +773,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/Weather.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        <state relative-caret-position="90">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <marker date="1501067899682" expanded="true" signature="328:431" ph="select * fro... forecast" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WeatherInfo.php">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state relative-caret-position="252">
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/phpinfo.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="29" column="74" lean-forward="false" selection-start-line="29" selection-start-column="74" selection-end-line="29" selection-end-column="74" />
+          <folding>
+            <element signature="e#485#495#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="70" column="41" lean-forward="true" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
+        <state relative-caret-position="236">
+          <caret line="90" column="23" lean-forward="false" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="23" />
           <folding>
             <element signature="e#40#64#0#PHP" expanded="true" />
-            <element signature="e#2065#2092#1#PHP" expanded="true" />
+            <element signature="e#2079#2102#1#PHP" expanded="true" />
+            <element signature="e#2744#2767#1#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WeatherInfo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1008">
+          <caret line="48" column="18" lean-forward="false" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

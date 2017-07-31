@@ -71,7 +71,12 @@ class DefaultController extends Controller
         $dbConect->persist($weatherInfo);
         $dbConect->flush();
 
-        return $this->render('default/phpinfo.html.twig');
+
+        $query = $dbConect->getRepository('AppBundle:WeatherInfo')->findAll();
+
+        dump($query);
+
+        return $this->render('default/phpinfo.html.twig', ['allWeater' => $query]);
 
     }
 
@@ -79,29 +84,27 @@ class DefaultController extends Controller
     /**
      * @Route("/sky/{mainCity}", name="WeatherApp")
      */
-    public function indexAction($mainCity = 'warszawa')
+    public function indexAction($mainCity = 'Warszawa')
     {
 
         $weatherService = $this->get('app.weather');
         $currentWeather = $weatherService->getWeather($mainCity);
 
+        $weatherInfo->setTemp(33);
+        $weatherInfo->setCond('cloudy');
+        $weatherInfo->setCountry('Poland');
+        $weatherInfo->setCity('warsaw');
 
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
+        $dbConect = $this->getDoctrine()->getManager();
+        $query = $dbConect->getRepository('AppBundle:WeatherInfo')->findAll();
 
-        $serializer = new Serializer($normalizers, $encoders);
-        $jsonWeather = new WeatherInfo();
-        $jsonWeather->setCity('Miasto');
-        $jsonWeather->setCountry('Panstwo');
-        $jsonWeather->setTemp('99');
-        $jsonWeather->setCondition('chmury');
-
-
-        $jsonContent = $serializer->serialize($currentWeather, 'json');
+        dump($query);
 
 
-        return $this->render('default/index.html.twig', $currentWeather
-            );
+
+
+        return $this->render('default/index.html.twig', ['currentWeather' =>$currentWeather, 'dbWeather' => $query
+            ]);
     }
 
 

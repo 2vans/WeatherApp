@@ -71,7 +71,7 @@ class WeatherInfo
         $this->cond = $cond;
     }
 
-
+    
 
 
 

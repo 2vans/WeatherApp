@@ -9,8 +9,43 @@
     <?php
         phpinfo();
     >
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>City</th>
+            <th>Country</th>
+            <th>Weather</th>
+            <th>Temp</th>
+            <th>Last Update</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for city in allWeater %}
+
+            <tr>
+                <td><a href="{{ path('WeatherApp' , {'mainCity': city.city}) }}">link</a> </td>>
+                <td>    {{ city.city }}</td>
+                <td>    {{ city.country }}</td>
+                <td>    {{ city.cond }}</td>
+                <td>    {{ city.temp }}</td>
+
+            </tr>
+
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+
 </head>
-</head>
+
 <body>
 
 </body>

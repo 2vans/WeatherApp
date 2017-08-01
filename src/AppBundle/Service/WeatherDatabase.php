@@ -29,10 +29,10 @@ class WeatherDatabase
 
     /**
      * WeatherDatabase constructor.
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      */
 
-    public function __construct(EntityManager $entityManager )
+    public function __construct(EntityManagerInterface $entityManager )
     {
         $this->entityManager = $entityManager;
     }
@@ -54,15 +54,37 @@ class WeatherDatabase
         dump($entityManager->getRepository('AppBundle:WeatherInfo'));
         $entityManager->persist($weatherInfo);
         $entityManager->flush();
-        $query = $entityManager->getRepository('AppBundle:WeatherInfo')->findAll();
 
 
 
 
-        return $query;
+
+        return null;
 
     }
 
+    public function writeObject(WeatherInfo $currentWeather) {
+        if($currentWeather->getCity() == null) {
+            die;
+        }
+        if ($currentWeather->getCond() == null) {
+            $currentWeather->setCond('unknown');
+        }
+        if ($currentWeather->getTemp() == null) {
+            $currentWeather->setTemp(0);
+        }
+        if ($currentWeather->getCountry() == null) {
+            $currentWeather->setCountry('unknown');
+        }
+
+
+
+
+        $entityManager = $this->entityManager;
+        dump($entityManager->getRepository('AppBundle:WeatherInfo'));
+        $entityManager->persist($currentWeather);
+        $entityManager->flush();
+    }
 
     public function read() {
         $entityManager = $this->entityManager;
@@ -84,6 +106,10 @@ class WeatherDatabase
 
         $currentCity->setTemp($currentWeather['city']);
         $currentCity->setCond($currentWeather['condition']);
+        $currentCity->setTemp($currentWeather['temp']);
+        $currentCity->setCountry($currentWeather['country']);
+
+
         $entityManager->flush();
 
 

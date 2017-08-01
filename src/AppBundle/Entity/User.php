@@ -11,7 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity;
  * @ORM\Table(name="app_users")
- * @UniqueEntity("userName")
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
@@ -94,6 +95,11 @@ class User implements UserInterface
     {
         return $this->password;
     }
+
+    public function setPassword($password) {
+        $this->password = $password;
+    }
+
 
     /**
      * @return string|null The salt

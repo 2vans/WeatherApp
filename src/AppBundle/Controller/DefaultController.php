@@ -2,42 +2,66 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class DefaultController extends Controller
 {
-
     /**
-     * @Route("/login", name="login")
+     * @Route("user/registration", name="registration")
      * @param Request $request
-     * @param AuthenticationUtils $authUtils
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    public function registrationAction(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
 
-    public function loginAction(Request $request, AuthenticationUtils $authUtils) {
+        $user = new User();
 
-        $error = $authUtils->getLastAuthenticationError();
-        $lastUsername = $authUtils->getLastUsername();
+        $form = $this->createFormBuilder($user)
+            ->add('email', EmailType::class)
+            ->add('username', TextType::class)
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
 
-        return $this->render('default/login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
+
+            return $this->redirectToRoute('WeatherApp');
+        }
+
+        return $this->render(
+            'default/registration.html.twig',
+            array('form' => $form->createView())
+        );
 
     }
 
 
-
-
-
-
     /**
      * @Route("{mainCity}", name="WeatherApp")
+     * @param string $mainCity
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction($mainCity = 'Warszawa')
     {

@@ -27,7 +27,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=25, unique=true)
      */
 
-    private $userName;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
@@ -47,8 +47,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid(null, true));
+
     }
 
 
@@ -57,7 +56,7 @@ class User implements UserInterface
     {
         return serialize(array(
             $this->id,
-            $this->userName,
+            $this->username,
             $this->password,
         ));
     }
@@ -69,7 +68,7 @@ class User implements UserInterface
     {
         list (
             $this->id,
-            $this->userName,
+            $this->username,
             $this->password,
             ) = unserialize($serialized);
     }
@@ -93,7 +92,7 @@ class User implements UserInterface
      */
     public function getPassword()
     {
-        // TODO: Implement getPassword() method. // dont need it right now
+        return $this->password;
     }
 
     /**
@@ -105,9 +104,9 @@ class User implements UserInterface
     }
 
 
-    public function setUsername($userName)
+    public function setUsername($username)
     {
-        $this->userName = $userName;
+        $this->username = $username;
     }
 
     /**
@@ -115,7 +114,7 @@ class User implements UserInterface
      */
     public function getUsername()
     {
-        return $this->userName;
+        return $this->username;
     }
 
     /**

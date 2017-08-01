@@ -3,29 +3,80 @@
 
 namespace AppBundle\Entity;
 
-
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
+/**
+ * @ORM\Entity;
+ * @ORM\Table(name="app_users")
+ * @UniqueEntity("userName")
+ */
 class User implements UserInterface
 {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
 
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
 
     private $userName;
+
     /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
+     * @ORM\Column(type="string", length=60, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+
+    public function __construct()
+    {
+        $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid(null, true));
+    }
+
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->userName,
+            $this->password,
+        ));
+    }
+
+    /** @see \Serializable::unserialize()
+     * @param $serialized
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->userName,
+            $this->password,
+            ) = unserialize($serialized);
+    }
+
+
+    /**
+    return array (Role|string)[] The user roles
      */
     public function getRoles()
     {
@@ -46,10 +97,6 @@ class User implements UserInterface
     }
 
     /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
-     *
      * @return string|null The salt
      */
     public function getSalt()
@@ -58,21 +105,16 @@ class User implements UserInterface
     }
 
 
-
-    public function setUsername($userName) {
+    public function setUsername($userName)
+    {
         $this->userName = $userName;
     }
 
     /**
-     * Returns the username used to authenticate the user.
-     *
      * @return string The username
      */
     public function getUsername()
     {
-
-
-
         return $this->userName;
     }
 
@@ -86,4 +128,54 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method. don't need it right now
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+
 }

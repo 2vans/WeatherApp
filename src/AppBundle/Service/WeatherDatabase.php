@@ -43,23 +43,16 @@ class WeatherDatabase
      */
     public function write(array $currentWeather) {
         $weatherInfo = new WeatherInfo();
+
         $weatherInfo->setTemp($currentWeather['temp']);
         $weatherInfo->setCond($currentWeather['condition']);
         $weatherInfo->setCountry($currentWeather['country']);
         $weatherInfo->setCity($currentWeather['city']);
 
-
-
         $entityManager = $this->entityManager;
         dump($entityManager->getRepository('AppBundle:WeatherInfo'));
         $entityManager->persist($weatherInfo);
         $entityManager->flush();
-
-
-
-
-
-        return null;
 
     }
 
@@ -76,9 +69,6 @@ class WeatherDatabase
         if ($currentWeather->getCountry() == null) {
             $currentWeather->setCountry('unknown');
         }
-
-
-
 
         $entityManager = $this->entityManager;
         dump($entityManager->getRepository('AppBundle:WeatherInfo'));
@@ -100,18 +90,12 @@ class WeatherDatabase
             throw new NotFoundHttpException('City not found');
         }
 
-
-
-
-
         $currentCity->setTemp($currentWeather['city']);
         $currentCity->setCond($currentWeather['condition']);
         $currentCity->setTemp($currentWeather['temp']);
         $currentCity->setCountry($currentWeather['country']);
 
-
         $entityManager->flush();
-
 
     }
 }

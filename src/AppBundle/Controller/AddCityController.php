@@ -11,35 +11,32 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AddCityController extends Controller
 {
-/**
-* @Route("/login", name="login")
-* @param Request $request
-* @return \Symfony\Component\HttpFoundation\Response
-*/
+    /**
+     * @Route("/add/city", name="addCity")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
 
-    public function newAction(Request $request) {
-
-
+    public function newCityAction(Request $request)
+    {
 
         $weather = new WeatherInfo();
-
-
 
         $form = $this->createFormBuilder($weather)
             ->add('city', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'Add City'))
             ->getForm();
 
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $weather = $form->getData();
             $weatherDatabase = $this->get('app.weather_database');
             $weatherDatabase->writeObject($weather);
 
-
-
-
             return $this->redirectToRoute('WeatherApp');
         }
+
+        return $this->render('default/addCity.html.twig', ['form' => $form->createView()]);
+    }
 }

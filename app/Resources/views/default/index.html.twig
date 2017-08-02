@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% extends 'base.html.twig' %}
 
+{% block title %}Weather{% endblock %}
 
-<div class="container">
-
-
+{% block body %}
     <h2>City</h2>
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -35,11 +26,6 @@
     <a type="button" class="btn-primary btn-lg" href="{{ path('login') }}">Login</a>
     <a type="button" class="btn-primary btn-lg" href="{{ path('addCity') }}">Add City</a>
     <a type="button" class="btn-primary btn-lg" href="{{ path('Registration') }}">Register</a>
-</div>
 
-
-</body>
-</html>
-
-
+{% endblock %}
 

@@ -9,8 +9,6 @@
 <body>
 
 
-
-
 <div class="container">
 
 
@@ -20,33 +18,24 @@
             <span class="caret"></span>{{ currentWeather.city }}</button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
             {% for city in dbWeather %}
-            <li role="presentation"><a role="menuitem" href="{{ path('WeatherApp', {'mainCity': city.city}) }}">{{ city.city }}</a></li>
+                <li role="presentation"><a role="menuitem"
+                                           href="{{ path('WeatherApp', {'mainCity': city.city}) }}">{{ city.city }}</a>
+                </li>
             {% endfor %}
         </ul>
     </div>
 
-        <h2>Select List</h2>
-        <div class="form-group">
-            <label for="cityChoice">City:</label>
-            <select class="form-control" id="cityChoice">
-            {% for city in dbWeather %}
-            <option>{{ city.city }}</option>
-            {% endfor %}
-            </select>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </div>
 
+    {{ currentWeather.city }}
+    {{ currentWeather.country }}
+    {{ currentWeather.temp }}
+    {{ currentWeather.condition }}
 
-
-
-        {{ currentWeather.city }}
-        {{ currentWeather.country }}
-        {{ currentWeather.temp }}
-        {{ currentWeather.condition }}
-
-        <a type="button" class="btn-primary btn-lg" href="{{ path('WeatherApp', {'mainCity': 'gdansk'}) }}">Refresh</a>
-
-    </div>
+    <a type="button" class="btn-primary btn-lg" href="{{ path('WeatherApp', {'mainCity': 'gdansk'}) }}">Refresh</a>
+    <a type="button" class="btn-primary btn-lg" href="{{ path('login') }}">Login</a>
+    <a type="button" class="btn-primary btn-lg" href="{{ path('addCity') }}">Add City</a>
+    <a type="button" class="btn-primary btn-lg" href="{{ path('Registration') }}">Register</a>
+</div>
 
 
 </body>

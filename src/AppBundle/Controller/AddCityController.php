@@ -20,22 +20,23 @@ class AddCityController extends Controller
     public function newCityAction(Request $request)
     {
 
-        $weather = new WeatherInfo();
-
+        $weather = new WeatherInfo();  //creating WeatherInfo object needed for form and Doctrine
+            //creating simple add City form
         $form = $this->createFormBuilder($weather)
             ->add('city', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'Add City'))
             ->getForm();
 
-
+            //handling request posted from addCity.html.twig view
         $form->handleRequest($request);
+            //checking if everything is ok
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $weather = $form->getData();
-            $weatherDatabase = $this->get('app.weather_database');
-            $weatherDatabase->writeObject($weather);
+            $weather = $form->getData(); //getting data from form to object WeatherInfo
+            $weatherDatabase = $this->get('app.weather_database'); //getting weather_database service to write object to database
+            $weatherDatabase->writeObject($weather); //writing object
 
-            return $this->redirectToRoute('WeatherApp');
+            return $this->redirectToRoute('WeatherApp'); //redirecting to main page
         }
 
         return $this->render('default/addCity.html.twig', ['form' => $form->createView()]);

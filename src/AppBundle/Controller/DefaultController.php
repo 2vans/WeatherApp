@@ -15,12 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("user/registration", name="Registration")
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
+
     public function registrationAction(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
 
         $user = new User();

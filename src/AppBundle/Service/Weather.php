@@ -13,10 +13,15 @@
 
 
 
-        public function getWeather($whichCity)
+        public function getWeather($whichCity, WeatherInfo $city)
         {
+            $latitude = $city->getLatitude();
+            $longitude = $city->getLongitude();
+            dump([$latitude, $longitude]);
+
             $BASE_URL = "http://query.yahooapis.com/v1/public/yql"; // do parametrow
-            $yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='$whichCity')";
+            $yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='(52.1704725,20.8118862)')";
+            //$yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='$whichCity')";
             $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json";
             // Make call with cURL
             $session = curl_init($yql_query_url);

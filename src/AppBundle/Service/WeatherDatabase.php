@@ -18,7 +18,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class WeatherDatabase
 
 
-
 {
     /**
      * @var EntityManagerInterface
@@ -32,7 +31,7 @@ class WeatherDatabase
      * @param EntityManagerInterface $entityManager
      */
 
-    public function __construct(EntityManagerInterface $entityManager )
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
@@ -41,7 +40,8 @@ class WeatherDatabase
      * @param array $currentWeather
      * @return mixed
      */
-    public function write(array $currentWeather) {
+    public function write(array $currentWeather)
+    {
         $weatherInfo = new WeatherInfo();
 
         $weatherInfo->setTemp($currentWeather['temp']);
@@ -56,7 +56,8 @@ class WeatherDatabase
 
     }
 
-    public function writeObject(WeatherInfo $currentWeather) {
+    public function writeObject(WeatherInfo $currentWeather)
+    {
         if ($currentWeather->getCond() == null) {
             $currentWeather->setCond('unknown');
         }
@@ -73,13 +74,15 @@ class WeatherDatabase
         $entityManager->flush();
     }
 
-    public function read() {
+    public function read()
+    {
         $entityManager = $this->entityManager;
         $query = $entityManager->getRepository('AppBundle:WeatherInfo')->findAll();
         return $query;
     }
 
-    public function update(array $currentWeather) {
+    public function update(array $currentWeather)
+    {
         $entityManager = $this->entityManager;
         $currentCity = $entityManager->getRepository(WeatherInfo::class)->findOneBy(['city' => $currentWeather['city']]);
 
@@ -93,6 +96,20 @@ class WeatherDatabase
         $currentCity->setCountry($currentWeather['country']);
 
         $entityManager->flush();
+
+    }
+
+    public function getByName($city)
+    {
+        $entityManager = $this->entityManager;
+        $currentCity = $entityManager->getRepository(WeatherInfo::class)->findOneBy(['city' => $city]);
+
+        if (!$currentCity) {
+            throw new NotFoundHttpException('City not found');
+        }
+
+        return $currentCity;
+
 
     }
 }

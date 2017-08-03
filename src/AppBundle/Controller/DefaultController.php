@@ -21,13 +21,16 @@ class DefaultController extends Controller
      * @param string $mainCity
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($mainCity = 'Warszawa')
+    public function indexAction($mainCity = 'Warsaw')
     {
         $weatherDatabase = $this->get('app.weather_database');
+        $city = $weatherDatabase->getByName($mainCity);
+
+        dump($city);
 
         $weatherService = $this->get('app.weather');
-        $currentWeather = $weatherService->getWeather($mainCity);
-        dump($currentWeather);
+        $currentWeather = $weatherService->getWeather($mainCity, $city);
+
 
 
         $weatherDatabase->update($currentWeather);

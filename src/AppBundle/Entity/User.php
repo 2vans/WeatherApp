@@ -1,141 +1,53 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 /**
- * @ORM\Entity;
- * @ORM\Table(name="app_users")
- * @UniqueEntity("username")
- * @UniqueEntity("email")
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
-
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="emial", type="string", length=255, unique=true)
      */
-    private $email;
+    private $emial;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=64)
      */
     private $password;
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    private $isActive;
-
-
-    public function __construct()
-    {
-        $this->isActive = true;
-
-    }
-
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-        ));
-    }
-
-    /** @see \Serializable::unserialize()
-     * @param $serialized
-     */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            ) = unserialize($serialized);
-    }
 
 
     /**
-    return array (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
-    }
-
-    /**
-     * Returns the password used to authenticate the user.
+     * Get id
      *
-     * This should be the encoded password. On authentication, a plain-text
-     * password will be salted, encoded, and then compared to this value.
-     *
-     * @return string The password
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function setPassword($password) {
-        $this->password = $password;
-    }
-
-
-    /**
-     * @return string|null The salt
-     */
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method. // dont need it right know.
-    }
-
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method. don't need it right now
-    }
-
-    /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -143,44 +55,102 @@ class User implements UserInterface
     }
 
     /**
-     * @param mixed $id
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
      */
-    public function setId($id)
+    public function setUsername($username)
     {
-        $this->id = $id;
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get username
+     *
+     * @return string
      */
-    public function getEmail()
+    public function getUsername()
     {
-        return $this->email;
+        return $this->username;
     }
 
     /**
-     * @param mixed $email
+     * Set emial
+     *
+     * @param string $emial
+     *
+     * @return User
      */
-    public function setEmail($email)
+    public function setEmial($emial)
     {
-        $this->email = $email;
+        $this->emial = $emial;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get emial
+     *
+     * @return string
      */
-    public function getisActive()
+    public function getEmial()
     {
-        return $this->isActive;
+        return $this->emial;
     }
 
     /**
-     * @param mixed $isActive
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
      */
-    public function setIsActive($isActive)
+    public function setPassword($password)
     {
-        $this->isActive = $isActive;
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+    }
+
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 
 
 }
+

@@ -23,9 +23,12 @@
     {{ currentWeather.condition }}
 
     <a type="button" class="btn-primary btn-lg" href="{{ path('WeatherApp', {'mainCity': 'gdansk'}) }}">Refresh</a>
-    <a type="button" class="btn-primary btn-lg" href="{{ path('login') }}">Login</a>
-    <a type="button" class="btn-primary btn-lg" href="{{ path('addCity') }}">Add City</a>
-    <a type="button" class="btn-primary btn-lg" href="{{ path('Registration') }}">Register</a>
-
+    {% if app.user %}
+        <a type="button" class="btn-primary btn-lg" href="{{ path('addCity') }}">Add City</a>
+        <a href="{{ logout_path('main') }}">Logout</a>
+    {% else %}
+        <a type="button" class="btn-primary btn-lg" href="{{ path('login') }}">Login</a>
+        <a type="button" class="btn-primary btn-lg" href="{{ path('Registration') }}">Register</a>
+    {% endif %}
 {% endblock %}
 

@@ -25,10 +25,11 @@ security:
             pattern:    ^/
             http_basic: ~
             provider: our_db_provider
-            anonymous: ~
             form_login:
                             login_path: login
                             check_path: login
+            logout: true
+            anonymous: ~
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

@@ -12,6 +12,9 @@ class loginController extends Controller
 {
     /**
      * @Route("/user/login", name="login")
+     * @param Request $request
+     * @param AuthenticationUtils $authUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
 
     public function loginAction(Request $request, AuthenticationUtils $authUtils) {
@@ -28,5 +31,14 @@ class loginController extends Controller
         ));
 
 
+    }
+
+    /**
+     * @Route("/user/logout")
+     */
+
+    public function logoutAction()
+    {
+        throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 }

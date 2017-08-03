@@ -1,5 +1,6 @@
 <?php
     namespace AppBundle\Service;
+    use AppBundle\Entity\WeatherInfo;
     use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
     class Weather {

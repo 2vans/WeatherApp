@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\WeatherInfo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,8 @@ class AddCityController extends Controller
             //creating simple add City form
         $form = $this->createFormBuilder($weather)
             ->add('city', TextType::class)
+            ->add('latitude', NumberType::class)
+            ->add('longitude', NumberType::class)
             ->add('save', SubmitType::class, array('label' => 'Add City'))
             ->getForm();
 

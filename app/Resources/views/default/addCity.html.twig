@@ -3,11 +3,56 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Add City{% endblock %}
-
+{% block script_start %}<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN6MW0nD0ilWL7GjM4ZBtm5dacHufOVEE&libraries=places"></script>
+    {% endblock %}
 {% block body %}
+
 
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
 
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    var placeSearch, autocomplete;
+
+    function initialize() {
+        var input = document.getElementById('form_city');
+        autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', fillGeoCode);
+    }
+
+    function fillGeoCode() {
+
+
+        var geocoder = new google.maps.Geocoder();
+        var address = document.getElementById('form_city').value;
+
+
+
+        geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+
+
+
+            document.getElementById('form_latitude').value = results[0].geometry.location.lat();
+
+            document.getElementById('form_longitude').value = results[0].geometry.location.lng();
+
+        }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    if (status === google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+
+    }
+
+</script>
 {% endblock %}

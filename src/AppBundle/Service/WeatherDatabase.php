@@ -57,9 +57,6 @@ class WeatherDatabase
     }
 
     public function writeObject(WeatherInfo $currentWeather) {
-        if($currentWeather->getCity() == null) {
-            die;
-        }
         if ($currentWeather->getCond() == null) {
             $currentWeather->setCond('unknown');
         }

@@ -61,24 +61,32 @@ class WeatherInfo
     private $temp;
 
     /**
+     * @ORM\Column(type="float")
+     */
+
+    private $latitude;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+
+    private $longitude;
+
+    /**
      * @return mixed
      */
-    public function getCond()
+    public function getCity()
     {
-        return $this->cond;
+        return $this->city;
     }
 
     /**
-     * @param mixed $cond
+     * @param mixed $city
      */
-    public function setCond($cond)
+    public function setCity($city)
     {
-        $this->cond = $cond;
+        $this->city = $city;
     }
-
-    
-
-
 
     /**
      * @return mixed
@@ -96,10 +104,21 @@ class WeatherInfo
         $this->country = $country;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCond()
+    {
+        return $this->cond;
+    }
 
-
-
-
+    /**
+     * @param mixed $cond
+     */
+    public function setCond($cond)
+    {
+        $this->cond = $cond;
+    }
 
     /**
      * @return mixed
@@ -117,23 +136,38 @@ class WeatherInfo
         $this->temp = $temp;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
 
+    /**
+     * @param mixed $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
 
     /**
      * @return mixed
      */
-    public function getCity()
+    public function getLongitude()
     {
-        return $this->city;
+        return $this->longitude;
     }
 
     /**
-     * @param mixed $city
+     * @param mixed $longitude
      */
-    public function setCity($city)
+    public function setLongitude($longitude)
     {
-        $this->city = $city;
+        $this->longitude = $longitude;
     }
+
 
 
 

@@ -1,46 +1,85 @@
 <?php
-    namespace AppBundle\Service;
-    use AppBundle\Entity\WeatherInfo;
-    use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-    class Weather {
+namespace AppBundle\Service;
 
-        /**
-         * @param WeatherInfo $city
-         * @return WeatherInfo
-         * @internal param string $whichCity
-         */
+use AppBundle\Entity\WeatherInfo;
 
+class Weather
+{
 
+    private $baseUrl;
+    private $baseYql;
 
-        public function getWeather(WeatherInfo $city)
-        {
-            $latitude = $city->getLatitude();
-            $longitude = $city->getLongitude();
-
-            $BASE_URL = "http://query.yahooapis.com/v1/public/yql"; // do parametrow
-            $yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='($latitude,$longitude)')";
-            $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json";
-            // Make call with cURL
-            $session = curl_init($yql_query_url);
-            curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-            $json = curl_exec($session);
-            // Convert JSON to PHP object
-            $phpObj = json_decode($json);
-
-
-            if ($phpObj == null) {
-                dump('No Weather Service Available, giving database data');
-                return $city;
-            }
-
-            $response = $phpObj->query->results->channel;
-
-            $city->setTemp($response->item->condition->temp);
-            $city->setCond($response->item->condition->text);
-
-
-            return $city;
-
-        }
+    /**
+     * Weather constructor.
+     * @param array $apiUrls
+     * @internal param $baseUrl
+     */
+    public function __construct(array $apiUrls)
+    {
+        $this->baseUrl = $apiUrls['base.url'];
+        $this->baseYql = $apiUrls['base.yql'];
     }
+
+    /**
+     * @param WeatherInfo $city
+     * @return WeatherInfo
+     * @internal param string $whichCity
+     */
+    public function getWeather(WeatherInfo $city)
+    {
+        $apiResponse = $this->getJson($city->getLatitude(), $city->getLongitude());
+        $this->setWeatherCondition($city, $apiResponse);
+
+        return $city;
+
+    }
+
+    /**
+     * @param $latitude
+     * @param $longitude
+     * @return mixed
+     */
+    private function getJson($latitude, $longitude)
+    {
+
+
+        $yqlQuery = urlencode(sprintf('%s"(%g,%g)")',
+            $this->baseYql,
+            $latitude,
+            $longitude
+        ));
+
+        $yqlQueryUrl = sprintf('%s?q=%s&format=json',
+            $this->baseUrl,
+            $yqlQuery
+        );
+
+        $session = curl_init($yqlQueryUrl);
+        curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec($session);
+        // Convert JSON to PHP object
+        $phpObj = json_decode($json);
+
+        return $phpObj;
+
+    }
+
+    /**
+     * @param WeatherInfo $city
+     * @param $apiResponse
+     */
+    private function setWeatherCondition(WeatherInfo $city, $apiResponse)
+    {
+
+        if ($apiResponse == null) {
+            dump('No Weather Service Available, giving database data');
+            return;
+        }
+
+        $response = $apiResponse->query->results->channel;
+
+        $city->setTemp($response->item->condition->temp);
+        $city->setCond($response->item->condition->text);
+    }
+}

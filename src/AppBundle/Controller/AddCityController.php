@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Form\WeatherInfoType;
 
 class AddCityController extends Controller
 {
@@ -22,17 +23,10 @@ class AddCityController extends Controller
     {
 
         $weather = new WeatherInfo();  //creating WeatherInfo object needed for form and Doctrine
-            //creating simple add City form
-        $form = $this->createFormBuilder($weather)
-            ->add('city', TextType::class)
-            ->add('latitude', NumberType::class)
-            ->add('longitude', NumberType::class)
-            ->add('save', SubmitType::class, array('label' => 'Add City'))
-            ->getForm();
 
-            //handling request posted from addCity.html.twig view
+        $form=$this->createForm(WeatherInfoType::class, $weather);
         $form->handleRequest($request);
-            //checking if everything is ok
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $weather = $form->getData(); //getting data from form to object WeatherInfo

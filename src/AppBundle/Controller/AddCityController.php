@@ -37,9 +37,9 @@ class AddCityController extends Controller
 
             $weather = $form->getData(); //getting data from form to object WeatherInfo
             $weatherDatabase = $this->get('app.weather_database'); //getting weather_database service to write object to database
-            $weatherDatabase->writeObject($weather); //writing object
+            $weatherDatabase->write($weather); //writing object
 
-            return $this->redirectToRoute('WeatherApp'); //redirecting to main page
+            return $this->redirectToRoute('WeatherApp', ['mainCity' => $weather->getCity()]); //redirecting to main page
         }
 
         return $this->render('default/addCity.html.twig', ['form' => $form->createView()]);

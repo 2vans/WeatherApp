@@ -44,13 +44,6 @@ class WeatherInfo
      * @ORM\Column(type="string")
      */
 
-    private $country;
-
-
-    /**
-     * @ORM\Column(type="string")
-     */
-
     private $cond;
 
 
@@ -86,22 +79,6 @@ class WeatherInfo
     public function setCity($city)
     {
         $this->city = $city;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param mixed $country
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
     }
 
     /**

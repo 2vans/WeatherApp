@@ -8,7 +8,7 @@
         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
             <span class="caret"></span>{{ currentWeather.city }}</button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            {% for city in dbWeather %}
+            {% for city in cityList %}
                 <li role="presentation"><a role="menuitem"
                                            href="{{ path('WeatherApp', {'mainCity': city.city}) }}">{{ city.city }}</a>
                 </li>
@@ -18,11 +18,10 @@
 
 
     {{ currentWeather.city }}
-    {{ currentWeather.country }}
     {{ currentWeather.temp }}
     {{ currentWeather.cond }}
 
-    <a type="button" class="btn-primary btn-lg" href="{{ path('WeatherApp', {'mainCity': 'gdansk'}) }}">Refresh</a>
+    <a type="button" class="btn-primary btn-lg" href="#">Refresh</a>
     {% if app.user %}
         <a type="button" class="btn-primary btn-lg" href="{{ path('addCity') }}">Add City</a>
         <a href="{{ logout_path('main') }}">Logout</a>

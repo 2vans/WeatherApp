@@ -24,24 +24,23 @@ class DefaultController extends Controller
     public function indexAction($mainCity = 'Warsaw, Poland')
     {
         $weatherDatabase = $this->get('app.weather_database');
-
         $city = $weatherDatabase->getByName($mainCity);
 
         dump($city);
 
         $weatherService = $this->get('app.weather');
-        $currentWeather = $weatherService->getWeather($mainCity, $city);
+        $currentWeather = $weatherService->getWeather($city);
 
         dump($currentWeather);
 
         $weatherDatabase->update($currentWeather);
-        $query = $weatherDatabase->read();
+        $cityList = $weatherDatabase->getCityList();
 
-        dump($query);
+        dump($cityList);
 
         return $this->render('default/index.html.twig', [
-            'currentWeather' =>$currentWeather,
-            'dbWeather' => $query,
+            'currentWeather' => $currentWeather,
+            'cityList' => $cityList,
             ]);
     }
 

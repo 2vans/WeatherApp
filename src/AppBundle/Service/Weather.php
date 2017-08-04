@@ -6,21 +6,20 @@
     class Weather {
 
         /**
-         * @param string $whichCity
-         *
+         * @param WeatherInfo $city
+         * @return WeatherInfo
+         * @internal param string $whichCity
          */
 
 
 
-        public function getWeather($whichCity, WeatherInfo $city)
+        public function getWeather(WeatherInfo $city)
         {
             $latitude = $city->getLatitude();
             $longitude = $city->getLongitude();
-            dump([$latitude, $longitude,]);
 
             $BASE_URL = "http://query.yahooapis.com/v1/public/yql"; // do parametrow
             $yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='($latitude,$longitude)')";
-            //$yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='$whichCity')";
             $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json";
             // Make call with cURL
             $session = curl_init($yql_query_url);
@@ -30,23 +29,16 @@
             $phpObj = json_decode($json);
 
 
-            if ($response = $phpObj->query->results == null) {
-                throw new NotFoundHttpException('City not found');
+            if ($phpObj == null) {
+                dump('No Weather Service Available, giving database data');
+                return $city;
             }
 
             $response = $phpObj->query->results->channel;
 
-            $cityName = $response->location->city;
-            $country = $response->location->country;
-
-
             $city->setTemp($response->item->condition->temp);
             $city->setCond($response->item->condition->text);
-            $temp = $response->item->condition->temp;
-            $condition = $response->item->condition->text;
-            dump([$temp, $condition]);
 
-            //return array('city' => $cityName, 'country' => $country, 'temp' => $temp, 'condition' => $condition);
 
             return $city;
 

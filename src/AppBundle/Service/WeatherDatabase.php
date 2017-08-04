@@ -36,65 +36,20 @@ class WeatherDatabase
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * @param array $currentWeather
-     * @return mixed
-     */
-    public function write(array $currentWeather)
+    public function write(WeatherInfo $city)
     {
-        $weatherInfo = new WeatherInfo();
-
-        $weatherInfo->setTemp($currentWeather['temp']);
-        $weatherInfo->setCond($currentWeather['condition']);
-        $weatherInfo->setCountry($currentWeather['country']);
-        $weatherInfo->setCity($currentWeather['city']);
+        $city->setCond('unknown');
+        $city->setTemp(0);
 
         $entityManager = $this->entityManager;
-        dump($entityManager->getRepository('AppBundle:WeatherInfo'));
-        $entityManager->persist($weatherInfo);
-        $entityManager->flush();
-
-    }
-
-    public function writeObject(WeatherInfo $currentWeather)
-    {
-        if ($currentWeather->getCond() == null) {
-            $currentWeather->setCond('unknown');
-        }
-        if ($currentWeather->getTemp() == null) {
-            $currentWeather->setTemp(0);
-        }
-        if ($currentWeather->getCountry() == null) {
-            $currentWeather->setCountry('unknown');
-        }
-
-        $entityManager = $this->entityManager;
-        dump($entityManager->getRepository('AppBundle:WeatherInfo'));
-        $entityManager->persist($currentWeather);
+        $entityManager->persist($city);
         $entityManager->flush();
     }
 
-    public function read()
+    public function update(WeatherInfo $city)
     {
         $entityManager = $this->entityManager;
-        $query = $entityManager->getRepository('AppBundle:WeatherInfo')->findAll();
-        return $query;
-    }
-
-    public function update(WeatherInfo $currentWeather)
-    {
-        $entityManager = $this->entityManager;
-        $currentCity = $entityManager->getRepository(WeatherInfo::class);//->findOneBy(['city' => $currentWeather['city']]);
-
-        if (!$currentCity) {
-            throw new NotFoundHttpException('City not found');
-        }
-        /*
-            $currentCity->setTemp($currentWeather['city']);
-            $currentCity->setCond($currentWeather['condition']);
-            $currentCity->setTemp($currentWeather['temp']);
-            $currentCity->setCountry($currentWeather['country']);
-        */
+        $entityManager->persist($city);
         $entityManager->flush();
 
     }
@@ -110,6 +65,14 @@ class WeatherDatabase
 
         return $currentCity;
 
-
     }
+
+    public function getCityList()
+    {
+        $entityManager = $this->entityManager;
+        $cityList = $entityManager->getRepository('AppBundle:WeatherInfo')->findAll();
+        return $cityList;
+    }
+
+
 }

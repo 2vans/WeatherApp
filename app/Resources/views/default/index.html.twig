@@ -20,7 +20,7 @@
     {{ currentWeather.city }}
     {{ currentWeather.country }}
     {{ currentWeather.temp }}
-    {{ currentWeather.condition }}
+    {{ currentWeather.cond }}
 
     <a type="button" class="btn-primary btn-lg" href="{{ path('WeatherApp', {'mainCity': 'gdansk'}) }}">Refresh</a>
     {% if app.user %}

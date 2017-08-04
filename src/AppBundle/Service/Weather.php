@@ -8,7 +8,6 @@
         /**
          * @param string $whichCity
          *
-         * @return array
          */
 
 
@@ -17,10 +16,10 @@
         {
             $latitude = $city->getLatitude();
             $longitude = $city->getLongitude();
-            dump([$latitude, $longitude]);
+            dump([$latitude, $longitude,]);
 
             $BASE_URL = "http://query.yahooapis.com/v1/public/yql"; // do parametrow
-            $yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='(52.1704725,20.8118862)')";
+            $yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='($latitude,$longitude)')";
             //$yql_query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='$whichCity')";
             $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json";
             // Make call with cURL
@@ -37,14 +36,19 @@
 
             $response = $phpObj->query->results->channel;
 
-            $city = $response->location->city;
+            $cityName = $response->location->city;
             $country = $response->location->country;
+
+
+            $city->setTemp($response->item->condition->temp);
+            $city->setCond($response->item->condition->text);
             $temp = $response->item->condition->temp;
             $condition = $response->item->condition->text;
+            dump([$temp, $condition]);
 
+            //return array('city' => $cityName, 'country' => $country, 'temp' => $temp, 'condition' => $condition);
 
-            return array('city' => $city, 'country' => $country, 'temp' => $temp, 'condition' => $condition);
-
+            return $city;
 
         }
     }

@@ -81,20 +81,20 @@ class WeatherDatabase
         return $query;
     }
 
-    public function update(array $currentWeather)
+    public function update(WeatherInfo $currentWeather)
     {
         $entityManager = $this->entityManager;
-        $currentCity = $entityManager->getRepository(WeatherInfo::class)->findOneBy(['city' => $currentWeather['city']]);
+        $currentCity = $entityManager->getRepository(WeatherInfo::class);//->findOneBy(['city' => $currentWeather['city']]);
 
         if (!$currentCity) {
             throw new NotFoundHttpException('City not found');
         }
-
-        $currentCity->setTemp($currentWeather['city']);
-        $currentCity->setCond($currentWeather['condition']);
-        $currentCity->setTemp($currentWeather['temp']);
-        $currentCity->setCountry($currentWeather['country']);
-
+        /*
+            $currentCity->setTemp($currentWeather['city']);
+            $currentCity->setCond($currentWeather['condition']);
+            $currentCity->setTemp($currentWeather['temp']);
+            $currentCity->setCountry($currentWeather['country']);
+        */
         $entityManager->flush();
 
     }

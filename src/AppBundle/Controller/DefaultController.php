@@ -21,9 +21,10 @@ class DefaultController extends Controller
      * @param string $mainCity
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($mainCity = 'Warsaw')
+    public function indexAction($mainCity = 'Warsaw, Poland')
     {
         $weatherDatabase = $this->get('app.weather_database');
+
         $city = $weatherDatabase->getByName($mainCity);
 
         dump($city);
@@ -31,14 +32,16 @@ class DefaultController extends Controller
         $weatherService = $this->get('app.weather');
         $currentWeather = $weatherService->getWeather($mainCity, $city);
 
-
+        dump($currentWeather);
 
         $weatherDatabase->update($currentWeather);
         $query = $weatherDatabase->read();
 
         dump($query);
 
-        return $this->render('default/index.html.twig', ['currentWeather' =>$currentWeather, 'dbWeather' => $query
+        return $this->render('default/index.html.twig', [
+            'currentWeather' =>$currentWeather,
+            'dbWeather' => $query,
             ]);
     }
 

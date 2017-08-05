@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 
 
-class WeatherInfo
+class WeatherInfo implements \Serializable
 {
 
     /**
@@ -145,7 +145,27 @@ class WeatherInfo
         $this->longitude = $longitude;
     }
 
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->city,
+            $this->cond,
+            $this->latitude,
+            $this->longitude
+        ));
+    }
 
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->city,
+            $this->cond,
+            $this->latitude,
+            $this->longitude
+            ) = unserialize($serialized);
+    }
 
 
 }

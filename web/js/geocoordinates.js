@@ -19,7 +19,7 @@ function fillGeoCode() {
 
 
 
-            document.getElementById('appbundle_weatherinfo_latitude').value = results[0].geometry.location.lat();
+            document.getElementById('appbundle_weatherinfo_latitude').advalue = results[0].geometry.location.lat();
 
             document.getElementById('appbundle_weatherinfo_longitude').value = results[0].geometry.location.lng();
 

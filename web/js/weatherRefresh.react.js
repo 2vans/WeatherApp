@@ -1,13 +1,13 @@
 var NoteSection = React.createClass({
     getInitialState: function () {
-        console.log('initial state');
         return {
             notes: []
         }
     },
     componentDidMount: function () {
         this.loadNotesFromServer();
-        setInterval(this.loadNotesFromServer, 200000000);
+        document.getElementById("refreshButton").addEventListener("click", this.loadNotesFromServer);
+
     },
     loadNotesFromServer: function () {
         $.ajax({
@@ -33,8 +33,10 @@ var NoteList = React.createClass({
         var noteNodes = this.props.notes.map(function (note) {
             return (
                 <div>
-                    <div >
+                    <div>
                         <h2>{note.city}</h2>
+                    </div>
+                    <div>
                         <p>{note.temp}, {note.cond}</p>
                     </div>
                 </div>
@@ -47,6 +49,5 @@ var NoteList = React.createClass({
         );
     }
 });
-
 
 window.NoteSection = NoteSection;

@@ -39,10 +39,10 @@ class DefaultController extends Controller
 
         dump($cityList);
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/2index.html.twig', [
             'currentWeather' => $currentWeather,
             'cityList' => $cityList,
-            ]);
+        ]);
     }
 
     /**
@@ -51,7 +51,8 @@ class DefaultController extends Controller
      * @param $mainCity
      * @return JsonResponse
      */
-    public function refreshWeatherAction($mainCity) {
+    public function refreshWeatherAction($mainCity)
+    {
 
         $weatherDatabase = $this->get('app.weather_database');
         $city = $weatherDatabase->getByName($mainCity);
@@ -59,14 +60,19 @@ class DefaultController extends Controller
         $currentWeather = $weatherService->getWeather($city);
         $weatherDatabase->update($currentWeather);
 
-        $weatherData = [
-            'city' => $currentWeather->getCity(),
-            'temp' => $currentWeather->getTemp(),
-            'cond' => $currentWeather->getCond(),
+        $notes = [
+            [
+                'id' => 1,
+                'city' => $currentWeather->getCity(),
+                'temp' => $currentWeather->getTemp(),
+                'cond' => $currentWeather->getCond(),
+            ]
+        ];
+        $data = [
+            'notes' => $notes
         ];
 
-
-        return $this->json($weatherData);
+        return new JsonResponse($data);
     }
 
 

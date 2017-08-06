@@ -1,12 +1,33 @@
 WeatherApp
 ==========
 
+Baza danych:
+  xampp:
+  sudo service mysql stop
+  Apache/2.4.25 (Unix) OpenSSL/1.0.2l PHP/7.1.6 mod_perl/2.0.8-dev Perl/v5.16.3
+  PHP version: 7.1.6
+  
+  server:
+   php bin/console s:start
+
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: weather_app
+    database_user: root
+    database_password: null
+    
+    api.urls:
+      base.url: 'http://query.yahooapis.com/v1/public/yql'
+      base.yql: 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='
+
 
 
 Korzystając z publicznie dostępnych usług sieciowych, stwórz aplikację, która będzie pobierała i wyświetlała w dowolnym miejscu strony informację na temat pogody w wybranym przez użytkownika mieście.
 
 Aplikacja powinna umożliwiać:
-  •    Sprawdzenie przez każdego użytkownika stanu aktualnej pogody w wybranym z predefiniowanej listy mieście. W wypadku braku połączenia z zewnętrznymi usługami, wyświetlony powinien być ostatni stan pogody. Aplikacja powinna   umożliwiać odświeżenie informacji pogodowych bez przeładowania strony.
+
+  • Sprawdzenie przez każdego użytkownika stanu aktualnej pogody w wybranym z predefiniowanej listy mieście. W wypadku braku połączenia z zewnętrznymi usługami, wyświetlony powinien być ostatni stan pogody. Aplikacja powinna   umożliwiać odświeżenie informacji pogodowych bez przeładowania strony.
 
   •    Dla ograniczonej grupy użytkowników aplikacja powinna umożliwiać:
      o    Konfigurację adresu usługi sieciowej wykorzystywanej do pobierania danych pogodowych (np. yahoo).

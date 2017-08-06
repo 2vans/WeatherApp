@@ -10,19 +10,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class RefreshWeatherController extends Controller
 {
     /**
-     * @Route("/city/{mainCity}/weather", name="refreshWeather")
+     * @Route("/city/{cityName}/weather", name="refresh_weather")
      * @Method("GET")
-     * @param $mainCity
+     * @param $cityName
      * @return JsonResponse
      */
-    public function refreshWeatherAction($mainCity)
+    public function refreshWeatherAction($cityName)
     {
 
-        $weatherDatabase = $this->get('app.weather_database');
-        $city = $weatherDatabase->getByName($mainCity);
+        $wd = $this->get('app.weather_database');
+        $city = $wd->getByName($cityName);
         $weatherService = $this->get('app.weather');
         $currentWeather = $weatherService->getWeather($city);
-        $weatherDatabase->update($currentWeather);
+        $wd->update($currentWeather);
 
         $notes = [
             [

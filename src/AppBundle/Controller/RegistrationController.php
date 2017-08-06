@@ -18,7 +18,7 @@ class RegistrationController extends Controller
     public function registerAction(Request $request)
     {
         $user = new User();
-        $form=$this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -32,6 +32,6 @@ class RegistrationController extends Controller
 
         return $this->render('app/registration.html.twig', [
             'registration_form' => $form->createView()
-        ] );
+        ]);
     }
 }

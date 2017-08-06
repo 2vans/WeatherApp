@@ -1,42 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: michal
- * Date: 31.07.17
- * Time: 13:48
- */
 
 namespace AppBundle\Service;
 
-
-use AppBundle\Entity\WeatherInfo;
-use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\City;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Cache\Adapter\DoctrineAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class WeatherDatabase
-
-
 {
-    /**
-     * @var EntityManagerInterface
-     */
 
     private $entityManager;
-
 
     /**
      * WeatherDatabase constructor.
      * @param EntityManagerInterface $entityManager
      */
-
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    public function write(WeatherInfo $city)
+    /**
+     * @param City $city
+     */
+    public function write(City $city)
     {
         $city->setCond('unknown');
         $city->setTemp(0);
@@ -46,31 +33,40 @@ class WeatherDatabase
         $entityManager->flush();
     }
 
-    public function update(WeatherInfo $city)
+    /**
+     * @param City $city
+     */
+    public function update(City $city)
     {
         $entityManager = $this->entityManager;
         $entityManager->persist($city);
         $entityManager->flush();
-
     }
 
-    public function getByName($city)
+    /**
+     * @param $cityName
+     * @return City|null|object
+     */
+    public function getByName($cityName)
     {
         $entityManager = $this->entityManager;
-        $currentCity = $entityManager->getRepository(WeatherInfo::class)->findOneBy(['city' => $city]);
+        $city = $entityManager->getRepository(City::class)->findOneBy(['city' => $cityName]);
 
-        if (!$currentCity) {
+        if (!$city) {
             throw new NotFoundHttpException('City not found');
         }
 
-        return $currentCity;
-
+        return $city;
     }
 
+    /**
+     * @return City[]|array
+     */
     public function getCityList()
     {
         $entityManager = $this->entityManager;
-        $cityList = $entityManager->getRepository('AppBundle:WeatherInfo')->findAll();
+        $cityList = $entityManager->getRepository('AppBundle:City')->findAll();
+
         return $cityList;
     }
 

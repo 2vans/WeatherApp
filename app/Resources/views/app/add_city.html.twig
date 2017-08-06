@@ -1,20 +1,14 @@
-
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Add City{% endblock %}
 
 {% block body %}
-
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
-
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN6MW0nD0ilWL7GjM4ZBtm5dacHufOVEE&libraries=places"></script>
     <script src="{{ asset('js/geocoordinates.js') }}"></script>
-
 {% endblock %}

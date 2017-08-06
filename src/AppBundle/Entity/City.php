@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: michal
- * Date: 27.07.17
- * Time: 13:02
- */
 
 namespace AppBundle\Entity;
 
@@ -12,16 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-
 /**
  * @ORM\Entity;
  * @ORM\Table(name="Weather_Info")
  * @UniqueEntity("city")
  */
-
-
-class WeatherInfo implements \Serializable
+class City implements \Serializable
 {
 
     /**
@@ -29,40 +19,32 @@ class WeatherInfo implements \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-
     private $id;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
-
     private $city;
-
 
     /**
      * @ORM\Column(type="string")
      */
-
     private $cond;
-
 
     /**
      * @ORM\Column(type="integer")
      */
-
     private $temp;
 
     /**
      * @ORM\Column(type="float")
      */
-
     private $latitude;
 
     /**
      * @ORM\Column(type="float")
      */
-
     private $longitude;
 
     /**

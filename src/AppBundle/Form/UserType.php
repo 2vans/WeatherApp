@@ -31,10 +31,10 @@ class UserType extends AbstractType
                 'second_options' => [
                     'label' => 'Repeat Password'
                 ]
-            ] )
-        ->add('register', SubmitType::class);
+            ])
+            ->add('register', SubmitType::class);
     }
-    
+
     /**
      * {@inheritdoc}
      */

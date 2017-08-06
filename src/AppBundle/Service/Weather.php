@@ -2,7 +2,7 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\WeatherInfo;
+use AppBundle\Entity\City;
 
 class Weather
 {
@@ -22,17 +22,16 @@ class Weather
     }
 
     /**
-     * @param WeatherInfo $city
-     * @return WeatherInfo
+     * @param City $city
+     * @return City
      * @internal param string $whichCity
      */
-    public function getWeather(WeatherInfo $city)
+    public function getWeather(City $city)
     {
         $apiResponse = $this->getJson($city->getLatitude(), $city->getLongitude());
         $this->setWeatherCondition($city, $apiResponse);
 
         return $city;
-
     }
 
     /**
@@ -42,8 +41,6 @@ class Weather
      */
     private function getJson($latitude, $longitude)
     {
-
-
         $yqlQuery = urlencode(sprintf('%s"(%g,%g)")',
             $this->baseYql,
             $latitude,
@@ -58,27 +55,23 @@ class Weather
         $session = curl_init($yqlQueryUrl);
         curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec($session);
-        // Convert JSON to PHP object
         $phpObj = json_decode($json);
 
         return $phpObj;
-
     }
 
     /**
-     * @param WeatherInfo $city
+     * @param City $city
      * @param $apiResponse
      */
-    private function setWeatherCondition(WeatherInfo $city, $apiResponse)
+    private function setWeatherCondition(City $city, $apiResponse)
     {
-
         if ($apiResponse == null) {
             dump('No Weather Service Available, giving database data');
             return;
         }
 
         $response = $apiResponse->query->results->channel;
-
         $city->setTemp($response->item->condition->temp);
         $city->setCond($response->item->condition->text);
     }

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather{% endblock %}
+
+{% block body %}
+    <h2>City</h2>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+            <span class="caret"></span>{{ currentWeather.city }}</button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            {% for city in cityList %}
+                <li role="presentation"><a
+                            role="menuitem"
+                            href="{{ path('weather_app', {'cityName': city.city}) }}">{{ city.city }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="weather-display"></div>
+
+    <a type="button" class="btn-primary btn-lg" id="refreshButton">Refresh</a>
+    {% if app.user %}
+        <a type="button" class="btn-primary btn-lg" href="{{ path('add_city') }}">Add City</a>
+        <a href="{{ logout_path('main') }}">Logout</a>
+    {% else %}
+        <a type="button" class="btn-primary btn-lg" href="{{ path('login') }}">Login</a>
+        <a type="button" class="btn-primary btn-lg" href="{{ path('register') }}">Register</a>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel" src="{{ asset('js/weatherRefresh.react.js') }}"></script>
+
+    <script type="text/babel">
+        var cityUrl = '{{ path('refresh_weather', {'cityName': currentWeather.city}) }}';
+        ReactDOM.render(
+                <NoteSection url={cityUrl}/>,
+            document.getElementById('weather-display')
+        );
+    </script>
+{% endblock %}

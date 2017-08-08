@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Form\CityType;
 
-class AddCityController extends Controller
+class CityController extends Controller
 {
 
     /**

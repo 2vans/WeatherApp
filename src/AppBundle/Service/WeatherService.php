@@ -111,7 +111,7 @@ class WeatherService
     public function getCityByName($cityName)
     {
         $entityManager = $this->entityManager;
-        $city = $entityManager->getRepository(City::class)->findOneBy(['city' => $cityName]);
+        $city = $entityManager->getRepository(City::class)->findOneByName($cityName);
 
         if (!$city) {
             throw new NotFoundHttpException('City not found');
@@ -126,7 +126,7 @@ class WeatherService
     public function getListOfAllCities()
     {
         $entityManager = $this->entityManager;
-        $cityList = $entityManager->createQuery('SELECT c.city FROM AppBundle:City c')->execute();
+        $cityList = $entityManager->getRepository(City::class)->listOfAllCities();
 
         return $cityList;
     }

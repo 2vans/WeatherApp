@@ -17,6 +17,17 @@ parameters:
     database_user: root
     database_password: null
     
+    Potrzebuje chociaż jednego miasta: 
+     
+     city: Warsaw, Poland
+     
+     city:      Warsaw, Poland
+     cond:      uknown
+     temp:      0
+     latitude:  52.2296756
+     longitude: 21.0122287
+    
+    
     api.urls:
       base.url: 'http://query.yahooapis.com/v1/public/yql'
       base.yql: 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='

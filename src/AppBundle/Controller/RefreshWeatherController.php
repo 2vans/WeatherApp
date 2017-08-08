@@ -18,11 +18,10 @@ class RefreshWeatherController extends Controller
     public function refreshWeatherAction($cityName)
     {
 
-        $wd = $this->get('app.weather_database');
-        $city = $wd->getByName($cityName);
-        $weatherService = $this->get('app.weather');
-        $currentWeather = $weatherService->getWeather($city);
-        $wd->update($currentWeather);
+        $weather = $this->get('app.weather');
+        $city = $weather->getCityByName($cityName);
+        $currentWeather = $weather->getCurrentWeatherFromApi($city);
+        $weather->updateCityToDatabase($currentWeather);
 
         $notes = [
             [

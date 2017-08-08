@@ -25,8 +25,8 @@ class AddCityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $city = $form->getData();
-            $weatherDatabase = $this->get('app.weather_database');
-            $weatherDatabase->write($city);
+            $weatherDatabase = $this->get('app.weather');
+            $weatherDatabase->writeCityToDatabase($city);
 
             return $this->redirectToRoute('weather_app', ['cityName' => $city->getCity()]);
         }

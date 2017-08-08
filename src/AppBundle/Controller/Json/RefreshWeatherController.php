@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\json;
+namespace AppBundle\Controller\Json;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

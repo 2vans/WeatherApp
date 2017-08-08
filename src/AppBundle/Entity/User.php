@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable, EquatableInterface
 {
     /**
      * @var int
@@ -155,6 +156,9 @@ class User implements UserInterface, \Serializable
         return $this->password;
     }
 
+    /**
+     * @return string
+     */
     public function serialize()
     {
         return serialize(array(
@@ -164,6 +168,9 @@ class User implements UserInterface, \Serializable
         ));
     }
 
+    /**
+     * @param string $serialized
+     */
     public function unserialize($serialized)
     {
         list (
@@ -173,21 +180,49 @@ class User implements UserInterface, \Serializable
             ) = unserialize($serialized);
     }
 
+    /**
+     * @return array
+     */
     public function getRoles()
     {
         return ['ROLE_USER'];
     }
 
+    /**
+     * @return null
+     */
     public function getSalt()
     {
         return null;
     }
 
+    /**
+     *
+     */
     public function eraseCredentials()
     {
         $this->plainPassword = null;
     }
 
+    /**
+     * @param UserInterface $user
+     * @return bool
+     */
+    public function isEqualTo(UserInterface $user)
+    {
+        if(!$user instanceof UserInterface) {
+            return false;
+        }
 
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
+    }
 }
 

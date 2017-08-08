@@ -65,7 +65,7 @@ class WeatherDatabase
     public function getCityList()
     {
         $entityManager = $this->entityManager;
-        $cityList = $entityManager->getRepository('AppBundle:City')->findAll();
+        $cityList = $entityManager->createQuery('SELECT c.city FROM AppBundle:City c')->execute();
 
         return $cityList;
     }

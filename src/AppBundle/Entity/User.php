@@ -54,7 +54,6 @@ class User implements UserInterface, \Serializable, EquatableInterface
      */
     private $password;
 
-
     /**
      * Get id
      *

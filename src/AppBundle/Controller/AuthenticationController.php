@@ -18,7 +18,7 @@ class AuthenticationController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $user = new User();
+        $user = new User(null, null);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 

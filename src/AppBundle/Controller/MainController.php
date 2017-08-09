@@ -10,22 +10,20 @@ class MainController extends Controller
 
     /**
      * @Route("{cityName}", name="weather_app")
-     * @param string $cityName
+     * @param $cityName
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction($cityName = 'Warsaw, Poland')
     {
-        $wd = $this->get('app.weather_database');
-        $city = $wd->getByName($cityName);
+        $weather = $this->get('app.weather');
+        $city = $weather->getCityByName($cityName);
+        $city = $weather->getCurrentWeatherFromApi($city);
 
-        $weatherService = $this->get('app.weather');
-        $currentWeather = $weatherService->getWeather($city);
-
-        $wd->update($currentWeather);
-        $cityList = $wd->getCityList();
+        $weather->updateCityToDatabase($city);
+        $cityList = $weather->getListOfAllCities();
 
         return $this->render('app/index.html.twig', [
-            'currentWeather' => $currentWeather,
+            'currentWeather' => $city,
             'cityList' => $cityList,
         ]);
     }

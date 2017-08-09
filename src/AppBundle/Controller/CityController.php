@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Form\CityType;
 
-class AddCityController extends Controller
+class CityController extends Controller
 {
 
     /**
@@ -25,8 +25,8 @@ class AddCityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $city = $form->getData();
-            $weatherDatabase = $this->get('app.weather_database');
-            $weatherDatabase->write($city);
+            $weatherDatabase = $this->get('app.weather');
+            $weatherDatabase->writeCityToDatabase($city);
 
             return $this->redirectToRoute('weather_app', ['cityName' => $city->getCity()]);
         }

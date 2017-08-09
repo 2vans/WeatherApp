@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity;
  * @ORM\Table(name="Weather_Info")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CityRepository")
  * @UniqueEntity("city")
  */
 class City implements \Serializable

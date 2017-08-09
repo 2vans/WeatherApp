@@ -5,13 +5,13 @@ namespace AppBundle\Service;
 use AppBundle\Entity\User;
 use Symfony\Component\DependencyInjection\Container;
 
-class HandleForms
+class HandleFormService
 {
     private $container;
     private $password;
 
     /**
-     * HandleForms constructor.
+     * HandleFormService constructor.
      * @param $container
      */
     public function __construct(Container $container)

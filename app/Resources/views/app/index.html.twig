@@ -11,7 +11,7 @@
             {% for city in cityList %}
                 <li role="presentation"><a
                             role="menuitem"
-                            href="{{ path('weather_app', {'cityName': city.city}) }}">{{ city.city }}</a>
+                            href="{{ path('weather_app', {'city_name': city.city}) }}">{{ city.city }}</a>
                 </li>
             {% endfor %}
         </ul>

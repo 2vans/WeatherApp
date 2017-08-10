@@ -34,7 +34,7 @@ class WeatherService
     public function getCurrentWeatherFromApi(City $city)
     {
         $apiResponse = $this->getJsonResponseFromApi($city->getLatitude(), $city->getLongitude());
-        $this->setWeatherCondition($city, $apiResponse);
+        $this->setWeatherConditionOnCurrentCity($city, $apiResponse);
 
         return $city;
     }
@@ -69,7 +69,7 @@ class WeatherService
      * @param City $city
      * @param $apiResponse
      */
-    private function setWeatherCondition(City $city, $apiResponse)
+    private function setWeatherConditionOnCurrentCity(City $city, $apiResponse)
     {
         if ($apiResponse == null) {
             dump('No WeatherService Service Available, giving database data');
@@ -114,7 +114,7 @@ class WeatherService
         $city = $entityManager->getRepository(City::class)->findOneByName($cityName);
 
         if (!$city) {
-            throw new NotFoundHttpException('City not found');
+            throw new NotFoundHttpException(sprintf('City not found'));
         }
 
         return $city;
@@ -129,5 +129,16 @@ class WeatherService
         $cityList = $entityManager->getRepository(City::class)->listOfAllCities();
 
         return $cityList;
+    }
+
+    /**
+     * @return City|null|object
+     */
+    public function getRandomCityFromDatabase()
+    {
+        $entityManager = $this->entityManager;
+        $randomCity = $entityManager->getRepository(City::class)->randomCityFromDatabase();
+
+        return $randomCity;
     }
 }

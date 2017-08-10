@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Security\User\UserProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ class AuthenticationController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $user = new User(null, null);
+        $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -26,9 +27,9 @@ class AuthenticationController extends Controller
 
             $handleForm = $this->get('app.handle_forms');
             $handleForm->handleRegisterForm($user);
-            $this->get('app.security')->login($user, $handleForm->getPassword());
+            $this->get(UserProvider::class)->loginUserAfterRegistration($user, $handleForm->getPassword());
 
-            return $this->redirectToRoute('weather_app');
+            return $this->redirectToRoute('random_city');
         }
 
         return $this->render('app/registration.html.twig', [
@@ -57,6 +58,6 @@ class AuthenticationController extends Controller
      */
     public function logoutAction()
     {
-        throw new \RuntimeException('Do not use it.');
+        throw new \RuntimeException(sprintf('Do not use it.'));
     }
 }

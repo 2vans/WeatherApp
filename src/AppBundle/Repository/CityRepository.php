@@ -29,4 +29,13 @@ class CityRepository extends EntityRepository
             ->getRepository(City::class)
             ->findOneBy(['city' => $city]);
     }
+
+    /**
+     * @return City|null|object
+     */
+    public function randomCityFromDatabase() {
+        return $this->getEntityManager()
+            ->getRepository(City::class)
+            ->findOneBy([]);
+    }
 }

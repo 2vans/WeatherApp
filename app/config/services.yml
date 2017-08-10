@@ -39,16 +39,6 @@ services:
         public: true
         arguments: [ "@doctrine.orm.entity_manager",'%app.urls%' ]
 
-    app.weather_database:
-      class: AppBundle\Service\WeatherDatabase
-      public: true
-      arguments: [ "@doctrine.orm.entity_manager" ]
-
-    app.security:
-      class: AppBundle\Service\Security
-      public: true
-      arguments: ['@service_container']
-
     app.handle_forms:
       class: AppBundle\Service\HandleFormService
       public: true

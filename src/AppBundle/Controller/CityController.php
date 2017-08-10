@@ -28,7 +28,7 @@ class CityController extends Controller
             $weatherDatabase = $this->get('app.weather');
             $weatherDatabase->writeCityToDatabase($city);
 
-            return $this->redirectToRoute('weather_app', ['cityName' => $city->getCity()]);
+            return $this->redirectToRoute('weather_app', ['city_name' => $city->getCity()]);
         }
 
         return $this->render('app/add_city.html.twig', ['form' => $form->createView()]);

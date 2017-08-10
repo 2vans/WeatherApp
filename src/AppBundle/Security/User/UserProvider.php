@@ -5,6 +5,8 @@ namespace AppBundle\Security\User;
 
 
 use AppBundle\Entity\User;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,14 +17,16 @@ class UserProvider implements UserProviderInterface
 {
 
     private $entityManager;
+    private $container;
 
     /**
      * UserProvider constructor.
      * @param $entityManager
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ContainerInterface $container)
     {
         $this->entityManager = $entityManager;
+        $this->container = $container;
     }
 
     /**
@@ -36,9 +40,7 @@ class UserProvider implements UserProviderInterface
         $userData = $entityManager->getRepository(User::class)->loadUserByUserName($username);
 
 
-        if($userData) {
-            $password = $userData->getPassword();
-
+        if ($userData) {
             $user = new User();
             $user->setPassword($userData->getPassword());
             $user->setUsername($userData->getUsername());
@@ -47,7 +49,7 @@ class UserProvider implements UserProviderInterface
         }
 
         throw new UsernameNotFoundException(sprintf(
-            'Username "%s" does not exist.', $username)
+                'Username "%s" does not exist.', $username)
         );
     }
 
@@ -63,7 +65,7 @@ class UserProvider implements UserProviderInterface
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
-            return $this->loadUserByUsername($user->getUsername());
+        return $this->loadUserByUsername($user->getUsername());
     }
 
     /**
@@ -73,5 +75,22 @@ class UserProvider implements UserProviderInterface
     public function supportsClass($class)
     {
         return User::class === $class;
+    }
+
+    /**
+     * @param User $user
+     * @param $password
+     */
+    public function loginUserAfterRegistration(User $user, $password)
+    {
+        $token = new UsernamePasswordToken(
+            $user,
+            $password,
+            'main',
+            $user->getRoles()
+        );
+
+        $this->container->get('security.token_storage')->setToken($token);
+        $this->container->get('session')->set('_security_main', serialize($token));
     }
 }

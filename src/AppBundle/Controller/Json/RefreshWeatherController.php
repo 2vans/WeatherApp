@@ -17,7 +17,6 @@ class RefreshWeatherController extends Controller
      */
     public function refreshWeatherAction($cityName)
     {
-
         $weather = $this->get('app.weather');
         $city = $weather->getCityByName($cityName);
         $currentWeather = $weather->getCurrentWeatherFromApi($city);

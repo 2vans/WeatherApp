@@ -131,7 +131,11 @@ class WeatherService
         return $cityList;
     }
 
-    public function getRandomCityFromDatabase() {
+    /**
+     * @return City|null|object
+     */
+    public function getRandomCityFromDatabase()
+    {
         $entityManager = $this->entityManager;
         $randomCity = $entityManager->getRepository(City::class)->randomCityFromDatabase();
 

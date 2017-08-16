@@ -7,16 +7,14 @@ security:
             algorithm: bcrypt
         AppBundle\Security\User\UserProvider:
             algorithm: bcrypt
+        AppBundle\Security\User\SecurityUser:
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
             memory: ~
-
         webservice:
               id: AppBundle\Security\User\UserProvider
-        our_db_provider:
-              entity:
-                    class: AppBundle:User
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs

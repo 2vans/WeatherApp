@@ -1,8 +1,6 @@
 <?php
 
-
 namespace AppBundle\Security\User;
-
 
 use AppBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,7 +19,8 @@ class UserProvider implements UserProviderInterface
 
     /**
      * UserProvider constructor.
-     * @param $entityManager
+     * @param EntityManagerInterface $entityManager
+     * @param ContainerInterface $container
      */
     public function __construct(EntityManagerInterface $entityManager, ContainerInterface $container)
     {
@@ -70,22 +69,5 @@ class UserProvider implements UserProviderInterface
     public function supportsClass($class)
     {
         return SecurityUser::class === $class;
-    }
-
-    /**
-     * @param User $user
-     * @param $password
-     */
-    public function loginUserAfterRegistration(User $user, $password)
-    {
-        $token = new UsernamePasswordToken(
-            $user,
-            $password,
-            'main',
-            $user->getRoles()
-        );
-
-        $this->container->get('security.token_storage')->setToken($token);
-        $this->container->get('session')->set('_security_main', serialize($token));
     }
 }

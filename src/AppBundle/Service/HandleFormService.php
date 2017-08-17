@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class HandleFormService
 {
     private $container;
-    private $password;
 
     /**
      * HandleFormService constructor.
@@ -33,8 +32,6 @@ class HandleFormService
             );
 
         $user->setPassword($password);
-        $this->password = $password;
-
         $em = $this->container->get("doctrine")->getManager();;
         $em->persist($user);
         $em->flush();
@@ -42,7 +39,6 @@ class HandleFormService
 
     /**
      * @param User $user
-     * @param $password
      */
     public function loginUserAfterRegistration(User $user)
     {
@@ -56,13 +52,4 @@ class HandleFormService
         $this->container->get('security.token_storage')->setToken($token);
         $this->container->get('session')->set('_security_main', serialize($token));
     }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
 }

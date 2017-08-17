@@ -3,20 +3,38 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\User;
-use Symfony\Component\DependencyInjection\Container;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class HandleFormService
 {
-    private $container;
+    private $entityManager;
+    private $encoder;
+    private $tokenStorage;
+    private $session;
 
     /**
      * HandleFormService constructor.
-     * @param $container
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $encoder
+     * @param TokenStorageInterface $tokenStorage
+     * @param SessionInterface $session
      */
-    public function __construct(Container $container)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UserPasswordEncoderInterface $encoder,
+        TokenStorageInterface $tokenStorage,
+        SessionInterface $session
+    )
     {
-        $this->container = $container;
+        $this->entityManager = $entityManager;
+        $this->encoder = $encoder;
+        $this->tokenStorage = $tokenStorage;
+        $this->session = $session;
     }
 
     /**
@@ -24,17 +42,10 @@ class HandleFormService
      */
     public function handleRegisterForm(User $user)
     {
-        $password = $this->container
-            ->get('security.password_encoder')
-            ->encodePassword(
-                $user,
-                $user->getPlainPassword()
-            );
-
+        $password = $this->encoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
-        $em = $this->container->get("doctrine")->getManager();;
-        $em->persist($user);
-        $em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
     /**
@@ -49,7 +60,7 @@ class HandleFormService
             $user->getRoles()
         );
 
-        $this->container->get('security.token_storage')->setToken($token);
-        $this->container->get('session')->set('_security_main', serialize($token));
+        $this->tokenStorage->setToken($token);
+        $this->session->set('_security_main', serialize($token));
     }
 }

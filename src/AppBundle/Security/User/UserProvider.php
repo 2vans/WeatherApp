@@ -30,8 +30,7 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $entityManager = $this->entityManager;
-        $userData = $entityManager->getRepository(User::class)->loadUserByUserName($username);
+        $userData = $this->entityManager->getRepository(User::class)->loadUserByUserName($username);
 
         if ($userData) {
             return new SecurityUser($userData);

@@ -20,7 +20,7 @@
     <div id="weather-display"></div>
 
     <a type="button" class="btn-primary btn-lg" id="refreshButton">Refresh</a>
-    {% if app.user %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <a type="button" class="btn-primary btn-lg" href="{{ path('add_city') }}">Add City</a>
         <a href="{{ logout_path('main') }}">Logout</a>
     {% else %}

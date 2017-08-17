@@ -3,8 +3,6 @@
 namespace AppBundle\Security\User;
 
 use AppBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,17 +13,14 @@ class UserProvider implements UserProviderInterface
 {
 
     private $entityManager;
-    private $container;
 
     /**
      * UserProvider constructor.
      * @param EntityManagerInterface $entityManager
-     * @param ContainerInterface $container
      */
-    public function __construct(EntityManagerInterface $entityManager, ContainerInterface $container)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->container = $container;
     }
 
     /**

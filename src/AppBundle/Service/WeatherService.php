@@ -89,9 +89,8 @@ class WeatherService
         $city->setCond('unknown');
         $city->setTemp(0);
 
-        $entityManager = $this->entityManager;
-        $entityManager->persist($city);
-        $entityManager->flush();
+        $this->entityManager->persist($city);
+        $this->entityManager->flush();
     }
 
     /**
@@ -99,9 +98,8 @@ class WeatherService
      */
     public function updateCityToDatabase(City $city)
     {
-        $entityManager = $this->entityManager;
-        $entityManager->persist($city);
-        $entityManager->flush();
+        $this->entityManager->persist($city);
+        $this->entityManager->flush();
     }
 
     /**
@@ -110,8 +108,7 @@ class WeatherService
      */
     public function getCityByName($cityName)
     {
-        $entityManager = $this->entityManager;
-        $city = $entityManager->getRepository(City::class)->findOneByName($cityName);
+        $city = $this->entityManager->getRepository(City::class)->findOneByName($cityName);
 
         if (!$city) {
             throw new NotFoundHttpException(sprintf('City not found'));
@@ -125,8 +122,7 @@ class WeatherService
      */
     public function getListOfAllCities()
     {
-        $entityManager = $this->entityManager;
-        $cityList = $entityManager->getRepository(City::class)->listOfAllCities();
+        $cityList = $this->entityManager->getRepository(City::class)->listOfAllCities();
 
         return $cityList;
     }
@@ -136,8 +132,7 @@ class WeatherService
      */
     public function getRandomCityFromDatabase()
     {
-        $entityManager = $this->entityManager;
-        $randomCity = $entityManager->getRepository(City::class)->randomCityFromDatabase();
+        $randomCity = $this->entityManager->getRepository(City::class)->randomCityFromDatabase();
 
         return $randomCity;
     }

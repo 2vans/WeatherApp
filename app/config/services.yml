@@ -42,4 +42,9 @@ services:
     app.handle_forms:
       class: AppBundle\Service\HandleFormService
       public: true
-      arguments: ['@service_container']
+      arguments: [
+        "@doctrine.orm.entity_manager",
+        "@security.user_password_encoder.generic",
+        "@security.token_storage",
+        "@session"
+        ]

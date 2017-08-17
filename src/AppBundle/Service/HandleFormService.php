@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\User;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class HandleFormService
 {
@@ -37,6 +38,23 @@ class HandleFormService
         $em = $this->container->get("doctrine")->getManager();;
         $em->persist($user);
         $em->flush();
+    }
+
+    /**
+     * @param User $user
+     * @param $password
+     */
+    public function loginUserAfterRegistration(User $user)
+    {
+        $token = new UsernamePasswordToken(
+            $user->getUsername(),
+            $user->getPassword(),
+            'main',
+            $user->getRoles()
+        );
+
+        $this->container->get('security.token_storage')->setToken($token);
+        $this->container->get('session')->set('_security_main', serialize($token));
     }
 
     /**

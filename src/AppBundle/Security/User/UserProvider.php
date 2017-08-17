@@ -1,8 +1,6 @@
 <?php
 
-
 namespace AppBundle\Security\User;
-
 
 use AppBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,7 +19,8 @@ class UserProvider implements UserProviderInterface
 
     /**
      * UserProvider constructor.
-     * @param $entityManager
+     * @param EntityManagerInterface $entityManager
+     * @param ContainerInterface $container
      */
     public function __construct(EntityManagerInterface $entityManager, ContainerInterface $container)
     {
@@ -39,13 +38,8 @@ class UserProvider implements UserProviderInterface
         $entityManager = $this->entityManager;
         $userData = $entityManager->getRepository(User::class)->loadUserByUserName($username);
 
-
         if ($userData) {
-            $user = new User();
-            $user->setPassword($userData->getPassword());
-            $user->setUsername($userData->getUsername());
-
-            return $user;
+            return new SecurityUser($userData);
         }
 
         throw new UsernameNotFoundException(sprintf(
@@ -60,7 +54,7 @@ class UserProvider implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        if (!$user instanceof User) {
+        if (!$user instanceof SecurityUser) {
             throw new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
@@ -74,23 +68,6 @@ class UserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return User::class === $class;
-    }
-
-    /**
-     * @param User $user
-     * @param $password
-     */
-    public function loginUserAfterRegistration(User $user, $password)
-    {
-        $token = new UsernamePasswordToken(
-            $user,
-            $password,
-            'main',
-            $user->getRoles()
-        );
-
-        $this->container->get('security.token_storage')->setToken($token);
-        $this->container->get('session')->set('_security_main', serialize($token));
+        return SecurityUser::class === $class;
     }
 }

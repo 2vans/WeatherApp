@@ -27,7 +27,7 @@ class AuthenticationController extends Controller
 
             $handleForm = $this->get('app.handle_forms');
             $handleForm->handleRegisterForm($user);
-            $this->get(UserProvider::class)->loginUserAfterRegistration($user, $handleForm->getPassword());
+            $handleForm->loginUserAfterRegistration($user);
 
             return $this->redirectToRoute('random_city');
         }

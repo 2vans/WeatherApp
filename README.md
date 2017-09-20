@@ -51,3 +51,6 @@ Mile widziane:
    •    Stworzenie strony responsywnej (RWD)
    •    Wykorzystanie REST API.
    •    Implementacja mechanizmów zabezpieczających/walidacji poprawiających jakość przekazu informacji.
+   
+   
+   sudo apt update -y && sudo apt upgrade -y && sudo apt install -y zsh guake tmux tmuxinator powerline mysql-client thunderbird php7.0 php7.0-mbstring php7.0-curl php7.0-mcrypt php7.0-xml php7.0-bcmath && sudo apt autoclean -y && sudo apt autoremove -y  
